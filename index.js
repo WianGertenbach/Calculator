@@ -1,18 +1,18 @@
 const calculator = {
     add: function(x,y) {
         const result = checkType(x,y);
-        return result.x+result.y;
+        return (result.x+result.y).toFixed(2);
     },
 
     subtract: function(x,y) {
         const result = checkType(x,y);
-        return result.x-result.y;
+        return (result.x-result.y).toFixed(2);
         //return arr.reduce((sum, current) => sum-current);
       },
 
       multiply: function(x,y) {
         const result = checkType(x,y);
-        return result.x*result.y;
+        return (result.x*result.y).toFixed(2);
         //return arr.reduce((sum, current) => sum*current,1);
     },
 
@@ -21,7 +21,7 @@ const calculator = {
         if (result.y === 0){
             return 'Error: Division by zero';
         }
-        return result.x/result.y;
+        return (result.x/result.y).toFixed(2);
         //return arr.reduce((sum, current) => sum/current,1);
     }
 };
@@ -42,6 +42,8 @@ const resultScreen = document.querySelector('.result');
 const operator = document.querySelectorAll('.operator');
 const equals = document.querySelector('.equals');
 
+
+
 digits.forEach(button => {
     button.addEventListener('click', ()=> {
         const number = document.createElement('p');
@@ -55,15 +57,23 @@ digits.forEach(button => {
 
 operator.forEach(button => {
     button.addEventListener('click', ()=> {
+        const allClasses = [...button.classList];
+        const desiredClassName = allClasses[1];
+        console.log(desiredClassName);
+
+        const symbol = document.createElement('p');
+        symbol.textContent = button.textContent;
+        operationScreen.appendChild(symbol);
         temp = userInput1;
         console.log("temp = "+temp);
         userInput1 = '';
         console.log("UserInput1 = "+userInput1);
-        currentOperator = calculator.multiply;
+        currentOperator = calculator[desiredClassName];
     })
 });
 
 equals.addEventListener('click', ()=> {
+    resultScreen.innerHTML = '';
     result = math(temp,userInput1,currentOperator);
     console.log(`Result: temp (${temp}) x userInput1 (${userInput1}) = ${result}))`);
     userInput1 = result;
@@ -71,7 +81,17 @@ equals.addEventListener('click', ()=> {
     const resultDisplay = document.createElement('p');
     resultDisplay.textContent = result;
     resultScreen.appendChild(resultDisplay);
+});
 
+const clearAll = document.querySelector('.clear');
+const screen = document.querySelector('.screen');
+
+clearAll.addEventListener('click', ()=> {
+    resultScreen.innerHTML = '';
+    operationScreen.innerHTML = '';
+    userInput1 = '';
+    temp = '';
+    result = '';
 })
 
 function checkType(x,y){
@@ -79,8 +99,8 @@ function checkType(x,y){
     let intX;
     let intY; 
     if (typeof x !== 'number' || typeof y !== 'number'){
-        intX = parseInt(x);
-        intY = parseInt(y);
+        intX = parseFloat(x);
+        intY = parseFloat(y);
     } else {
         intX = x;
         intY = y;
