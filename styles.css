@@ -29,6 +29,20 @@ body {
     height: 50px;
     border-radius: 5px;
     border: 5px solid rgb(60, 56, 65);
+    display: flex;
+    flex-direction: column;
+    color: aliceblue;
+}
+
+.operation {
+    display: flex;
+
+
+}
+
+.result {
+    display: flex;
+    font-size: 24px;
 }
 
 button {
@@ -62,3 +76,4 @@ p {
     color: white;
     text-align: center;
 }
+
