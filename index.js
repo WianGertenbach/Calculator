@@ -1,30 +1,32 @@
+const calculator = {
+    add: function(x,y) {
+        const result = checkType(x,y);
+        return result.x+result.y;
+    },
 
-const add = function(x,y) {
-    const result = checkType(x,y);
-    return result.x+result.y;
-    //return arr.reduce((sum, current) => sum+current,0);
-};
+    subtract: function(x,y) {
+        const result = checkType(x,y);
+        return result.x-result.y;
+        //return arr.reduce((sum, current) => sum-current);
+      },
 
-const subtract = function(x,y) {
-    const result = checkType(x,y);
-    return result.x-result.y;
-    //return arr.reduce((sum, current) => sum-current);
-  };
+      multiply: function(x,y) {
+        const result = checkType(x,y);
+        return result.x*result.y;
+        //return arr.reduce((sum, current) => sum*current,1);
+    },
 
-const multiply = function(x,y) {
-    const result = checkType(x,y);
-    return result.x*result.y;
-    //return arr.reduce((sum, current) => sum*current,1);
-};
-
-const divide = function(x,y) {
-    const result = checkType(x,y);
-    if (result.y === 0){
-        return 'Error: Division by zero';
+    divide: function(x,y) {
+        const result = checkType(x,y);
+        if (result.y === 0){
+            return 'Error: Division by zero';
+        }
+        return result.x/result.y;
+        //return arr.reduce((sum, current) => sum/current,1);
     }
-    return result.x/result.y;
-    //return arr.reduce((sum, current) => sum/current,1);
 };
+
+
 
 function math(x,y,operator) {
     return operator(x,y);
@@ -32,7 +34,6 @@ function math(x,y,operator) {
 
 let userInput1 = '';
 let temp = '';
-let userInput2 = '';
 let currentOperator;
 
 const digits = document.querySelectorAll(".num");
@@ -58,7 +59,7 @@ operator.forEach(button => {
         console.log("temp = "+temp);
         userInput1 = '';
         console.log("UserInput1 = "+userInput1);
-        currentOperator = multiply;
+        currentOperator = calculator.multiply;
     })
 });
 
@@ -67,6 +68,10 @@ equals.addEventListener('click', ()=> {
     console.log(`Result: temp (${temp}) x userInput1 (${userInput1}) = ${result}))`);
     userInput1 = result;
     console.log("UserInput1 = "+userInput1);
+    const resultDisplay = document.createElement('p');
+    resultDisplay.textContent = result;
+    resultScreen.appendChild(resultDisplay);
+
 })
 
 function checkType(x,y){

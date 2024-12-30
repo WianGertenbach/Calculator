@@ -36,13 +36,12 @@ body {
 
 .operation {
     display: flex;
-
-
 }
 
 .result {
     display: flex;
     font-size: 24px;
+    justify-content: flex-end;
 }
 
 button {
