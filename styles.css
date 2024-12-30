@@ -1,6 +1,7 @@
 * {
     margin: 0;
     padding: 0;
+    font-family: "Inter", serif;
 }
 
 body {
@@ -55,4 +56,9 @@ button:hover {
     color: white;
     font-weight: bold;
 
+}
+
+p {
+    color: white;
+    text-align: center;
 }
