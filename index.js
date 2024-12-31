@@ -27,7 +27,7 @@ const calculator = {
 
     pow: function(x,y){
         const result = checkType(x,y);
-        return Math.pow(result.x,result.y);
+        return Math.pow(result.x,result.y).toFixed(2);
     },
 
     perc: function(x){
@@ -50,19 +50,16 @@ const calculator = {
 };
 
 
-
-function math(x,y,operator) {
-    return operator(x,y);
-}
-
 let userInput1 = '';
 let temp = '';
 let currentOperator;
 let result = '0';
 
+
 const digits = document.querySelectorAll(".num");
 const operationScreen = document.querySelector('.operation');
 const resultScreen = document.querySelector('.result');
+
 const operator = document.querySelectorAll('.operator');
 const equals = document.querySelector('.equals');
 
@@ -70,6 +67,7 @@ const equals = document.querySelector('.equals');
 
 digits.forEach(button => {
     button.addEventListener('click', ()=> {
+
         const number = document.createElement('p');
         number.textContent = button.textContent;
         operationScreen.appendChild(number);
@@ -97,18 +95,28 @@ operator.forEach(button => {
 });
 
 equals.addEventListener('click', ()=> {
+    const resultDisplay = document.createElement('p');
     resultScreen.innerHTML = '';
+
+    if (currentOperator === undefined && userInput1 === ''){
+        clearCalc();
+        console.log("No user input or operator");
+        resultDisplay.textContent = "Input a value";
+        resultScreen.appendChild(resultDisplay);
+        return;
+    } 
     if (temp === ''){
+        console.log("temp yes");
         temp = '0';
         currentOperator = calculator.add;
-    }
+    } 
 
     result = math(temp,userInput1,currentOperator);
     userInput1 = result;
 
-    const resultDisplay = document.createElement('p');
     resultDisplay.textContent = result;
     resultScreen.appendChild(resultDisplay);
+    
 
 });
 
@@ -116,12 +124,30 @@ const clearAll = document.querySelector('.clear');
 const screen = document.querySelector('.screen');
 
 clearAll.addEventListener('click', ()=> {
+    clearCalc();
+
+});
+
+const deleteBtn = document.querySelector('.delete');
+
+deleteBtn.addEventListener('click', () => {
+    userInput1 = '';
+    operationScreen.innerHTML = '';
+});
+
+
+function clearCalc(){
     resultScreen.innerHTML = '';
     operationScreen.innerHTML = '';
     userInput1 = '';
     temp = '';
     result = '';
-})
+    currentOperator = undefined;
+}
+
+function math(x,y,operator) {
+    return operator(x,y);
+};
 
 function checkType(x,y){
 
