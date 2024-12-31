@@ -7,13 +7,11 @@ const calculator = {
     subtract: function(x,y) {
         const result = checkType(x,y);
         return (result.x-result.y).toFixed(2);
-        //return arr.reduce((sum, current) => sum-current);
       },
 
       multiply: function(x,y) {
         const result = checkType(x,y);
         return (result.x*result.y).toFixed(2);
-        //return arr.reduce((sum, current) => sum*current,1);
     },
 
     divide: function(x,y) {
@@ -22,7 +20,6 @@ const calculator = {
             return 'Error: Division by zero';
         }
         return (result.x/result.y).toFixed(2);
-        //return arr.reduce((sum, current) => sum/current,1);
     },
 
     pow: function(x,y){
