@@ -49,6 +49,7 @@ digits.forEach(button => {
         const number = document.createElement('p');
         number.textContent = button.textContent;
         operationScreen.appendChild(number);
+
         userInput1 += button.textContent;
         console.log("UserInput1 = "+userInput1);
     });
@@ -59,25 +60,27 @@ operator.forEach(button => {
     button.addEventListener('click', ()=> {
         const allClasses = [...button.classList];
         const desiredClassName = allClasses[1];
-        console.log(desiredClassName);
 
         const symbol = document.createElement('p');
         symbol.textContent = button.textContent;
         operationScreen.appendChild(symbol);
+
         temp = userInput1;
-        console.log("temp = "+temp);
         userInput1 = '';
-        console.log("UserInput1 = "+userInput1);
+
         currentOperator = calculator[desiredClassName];
     })
 });
 
 equals.addEventListener('click', ()=> {
     resultScreen.innerHTML = '';
+    if (temp === ''){
+        temp = '0';
+        currentOperator = calculator.add;
+    }
     result = math(temp,userInput1,currentOperator);
-    console.log(`Result: temp (${temp}) x userInput1 (${userInput1}) = ${result}))`);
     userInput1 = result;
-    console.log("UserInput1 = "+userInput1);
+
     const resultDisplay = document.createElement('p');
     resultDisplay.textContent = result;
     resultScreen.appendChild(resultDisplay);
