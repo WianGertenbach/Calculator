@@ -54,6 +54,7 @@ let result = '0';
 
 
 const digits = document.querySelectorAll(".num");
+const dot = document.querySelector(".dot");
 const operationScreen = document.querySelector('.operation');
 const resultScreen = document.querySelector('.result');
 
@@ -64,6 +65,9 @@ const equals = document.querySelector('.equals');
 
 digits.forEach(button => {
     button.addEventListener('click', ()=> {
+        dot.addEventListener('click', ()=>{
+            dot.disabled = true;    
+        })
 
         const number = document.createElement('p');
         number.textContent = button.textContent;
@@ -77,6 +81,7 @@ digits.forEach(button => {
 
 operator.forEach(button => {
     button.addEventListener('click', ()=> {
+        dot.disabled = false; 
         const allClasses = [...button.classList];
         const desiredClassName = allClasses[1];
 
@@ -140,6 +145,7 @@ function clearCalc(){
     temp = '';
     result = '';
     currentOperator = undefined;
+    dot.disabled = false; 
 }
 
 function math(x,y,operator) {
