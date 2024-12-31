@@ -23,6 +23,29 @@ const calculator = {
         }
         return (result.x/result.y).toFixed(2);
         //return arr.reduce((sum, current) => sum/current,1);
+    },
+
+    pow: function(x,y){
+        const result = checkType(x,y);
+        return Math.pow(result.x,result.y);
+    },
+
+    perc: function(x){
+        const result = checkType(x);
+        return (result.x/100).toFixed(2);
+    },
+
+    factorial: function(x){
+        const result = checkType(x);
+        if (result.x === 0){
+            return 1;
+          } else {
+            let factorialArr = [];
+            for (let i = 1; i <= result.x; i++){
+              factorialArr.push(i);
+            }
+            return factorialArr.reduce((total, current) => total*current, 1).toFixed(2);
+          }
     }
 };
 
@@ -35,6 +58,7 @@ function math(x,y,operator) {
 let userInput1 = '';
 let temp = '';
 let currentOperator;
+let result = '0';
 
 const digits = document.querySelectorAll(".num");
 const operationScreen = document.querySelector('.operation');
@@ -78,12 +102,14 @@ equals.addEventListener('click', ()=> {
         temp = '0';
         currentOperator = calculator.add;
     }
+
     result = math(temp,userInput1,currentOperator);
     userInput1 = result;
 
     const resultDisplay = document.createElement('p');
     resultDisplay.textContent = result;
     resultScreen.appendChild(resultDisplay);
+
 });
 
 const clearAll = document.querySelector('.clear');
